@@ -196,6 +196,8 @@ Thumbs.db:encryptable
 ehthumbs.db
 ehthumbs_vista.db
 
+postgres_data
+
 # Dump file
 *.stackdump
 

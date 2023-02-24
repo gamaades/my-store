@@ -1,17 +1,30 @@
 const express = require('express');
+const { user } = require('pg/lib/defaults');
 const router = express.Router();
 const usersServices = require("./../services/user.service")
 const service = new usersServices();
 
-router.get('/', (req, res) => {
-  const users = service.find();
-  res.json(users);
-});
+// //antes
+// router.get('/', (req, res) => {
+//   const users = service.find();
+//   res.json(users);
+// });
 
-router.get("/:id", (req, res) => {
-  const { id } = req.params;
-  const user = service.findOne(id);
-  res.json(user);
+// antes
+// router.get("/:id", (req, res) => {
+//   const { id } = req.params;
+//   const user = service.findOne(id);
+//   res.json(user);
+// });
+
+router.get("/", async (req, res, next) => {
+  try {
+    const users = await service.find();
+    console.log(users);
+    res.json(users);
+  } catch (error) {
+    next(error)
+  }
 });
 
 router.post("/", (req, res) => {
